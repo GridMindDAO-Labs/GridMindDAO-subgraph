@@ -1,0 +1,157 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Governance
+    network: bsc
+    source:
+      address: "0x452221D0E9148d29460B058113b332885dbA47B9"
+      abi: Governance
+      startBlock: 28484229
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ProposalCreated
+        - VoteCast
+      abis:
+        - name: Governance
+          file: ./abis/Governance.json
+      eventHandlers:
+        - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)
+          handler: handleProposalCreated
+        - event: VoteCast(indexed address,uint256,uint8,uint256,string)
+          handler: handleVoteCast
+      file: ./src/governance.ts
+  - kind: ethereum
+    name: Financing
+    network: bsc
+    source:
+      address: "0xBaD2d46b664bAFe18aC4B806edFB07efD6F7FDe2"
+      abi: Financing
+      startBlock: 28718988
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Deposited
+        - Withdrawn
+        - SavingsRateUpdated
+        - UserPeriodFinishUpdated
+      abis:
+        - name: Financing
+          file: ./abis/Financing.json
+      eventHandlers:
+        - event: Deposited(bytes32,indexed address,indexed address,uint256)
+          handler: handleDeposited
+        - event: Withdrawn(bytes32,indexed address,indexed address,uint256,uint256)
+          handler: handleWithdrawn
+        - event: SavingsRateUpdated(indexed address,uint256,uint256)
+          handler: handleSavingsRateUpdated
+        - event: UserPeriodFinishUpdated(bytes32,indexed address,uint256)
+          handler: handleUserPeriodFinishUpdated
+      file: ./src/financing.ts
+  - kind: ethereum
+    name: LPToken
+    network: bsc
+    source:
+      address: "0x7dff526FcC9695f9E5b3eeE4EA983A3C685d67ab"
+      abi: LPToken
+      startBlock: 28484226
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - DelegateChanged
+        - DelegateVotesChanged
+      abis:
+        - name: LPToken
+          file: ./abis/LPToken.json
+      eventHandlers:
+        - event: DelegateChanged(indexed address,indexed address,indexed address)
+          handler: handleDelegateChanged
+        - event: DelegateVotesChanged(indexed address,uint256,uint256)
+          handler: handleDelegateVotesChanged
+      file: ./src/lpToken.ts
+  - kind: ethereum
+    name: InvitationRewards
+    network: bsc
+    source:
+      address: "0xBe3C302C93017098Ce013CcC1Af3c1B8F105E4BD"
+      abi: InvitationRewards
+      startBlock: 28484240
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Staked
+        - UnStaked
+        - RewardClaimed
+        - CommunityLevelUpdated
+      abis:
+        - name: InvitationRewards
+          file: ./abis/InvitationRewards.json
+      eventHandlers:
+        - event: Staked(indexed address,address,uint256)
+          handler: handleStaked
+        - event: UnStaked(indexed address,address,uint256)
+          handler: handleUnStaked
+        - event: RewardClaimed(indexed address,uint256)
+          handler: handleRewardClaimed
+        - event: CommunityLevelUpdated(indexed address,uint256,uint256)
+          handler: handleCommunityLevelUpdated
+      file: ./src/invitationRewards.ts
+  - kind: ethereum
+    name: StakingRewards
+    network: bsc
+    source:
+      address: "0x19DE03eb5979dEe621Ab823112559d1c1553bdc5"
+      abi: StakingRewards
+      startBlock: 28484240
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - OrderCreated
+        - RewardClaimed
+      abis:
+        - name: StakingRewards
+          file: ./abis/StakingRewards.json
+      eventHandlers:
+        - event: OrderCreated(bytes32,indexed address,uint256)
+          handler: handleOrderCreated
+        - event: RewardClaimed(indexed address,uint256)
+          handler: handleRewardClaimed
+      file: ./src/stakingRewards.ts
+  - kind: ethereum
+    name: LiquidityStaking
+    network: bsc
+    source:
+      address: "0xe3b117C155034556d56c47879143834FAbA28478"
+      abi: LiquidityStaking
+      startBlock: 28484241
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Deposited
+        - Withdrawn
+        - RewardClaimed
+      abis:
+        - name: LiquidityStaking
+          file: ./abis/LiquidityStaking.json
+      eventHandlers:
+        - event: Deposited(bytes32,indexed address,uint256,uint256,uint256)
+          handler: handleDeposited
+        - event: Withdrawn(bytes32,indexed address,uint256,uint256,uint256)
+          handler: handleWithdrawn
+        - event: RewardClaimed(indexed address,uint256)
+          handler: handleRewardClaimed
+      file: ./src/liquidityStaking.ts

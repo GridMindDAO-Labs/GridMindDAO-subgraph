@@ -1,0 +1,120 @@
+# 投票统计人员名单那
+type ForVotesInfo @entity {
+  id: ID!
+  support: Boolean!
+  voter: Bytes!
+  weight: BigInt!
+}
+
+# 所有发起提案列表
+type ProposalsList @entity {
+  id: ID!
+  proposalId: BigInt! # uint256
+  proposer: Bytes! # address
+  targets: [Bytes!]! # address[]
+  values: [BigInt!]! # uint256[]
+  signatures: [String!]! # string[]
+  calldatas: [Bytes!]! # bytes[]
+  startBlock: BigInt! # uint256
+  endBlock: BigInt! # uint256
+  description: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  state: BigInt! # state
+  forVotes: [ForVotesInfo!]!
+}
+
+# 系统统计数据列表
+type GMDCount @entity {
+  id: ID!
+  totalProposal: BigInt! # 提案列表总数量
+  totalFinance: BigInt! # 理财存入总订单数量
+  totalStaticFinancialRevenue: BigInt! # 静态理财总收益
+  totalLiquidityRevenue: BigInt! # 流动池理财总收益
+  totalLiquidityVotes: BigInt! # 治理总票权
+  totalLiquidityValidNewVotes: BigInt! # 有效的新质押总票数
+  totalLiquidityValidNOldVotes: BigInt! # 有效的旧质押总票数
+  totalWeekType: BigInt! #统计目前总期数（market）
+}
+
+# 理财年利率变化列表
+type RateUpdated @entity {
+  id: ID!
+  newRate: BigInt!
+  date: BigInt!
+  token: Bytes! # address
+}
+
+# 理财收益列表
+type DepositedList @entity {
+  id: ID!
+  token: Bytes! # address
+  account: Bytes!
+  amount: BigInt!
+  maturityAt: BigInt!
+  orderHash: Bytes!
+  governanceVotes: BigInt!
+  createAt: BigInt!
+  gmdTokenRevenues: BigInt!
+  isRedeem: Boolean!
+  nftTokenId: BigInt!
+  liquiditesAmount: BigInt!
+}
+
+# 某用户统计数据列表
+type AccountHistoryCount @entity {
+  id: ID!
+  totalStaticFinancialRevenue: BigInt! # 某用户静态理财总收益
+  totalLiquidityRevenue: BigInt! # 某用户流动池理财总收益
+  totalLiquidityVotes: BigInt! # 某用户治理总票权
+  starkingRewardEndAt: BigInt! #收益订单最新时间
+  invitationTotal: BigInt! #用户邀请记录总收益
+}
+
+# 所有票权用户列表
+type DelegatesList @entity {
+  id: ID!
+  account: Bytes! #address
+  delegateAddress: Bytes! #address
+  isDelegate: Boolean!
+  gmdTokenAmount: BigInt!
+  totalVotes: BigInt! #address 总票权
+  walletVotes: BigInt! #钱包票权
+}
+
+# 所有用户邀请记录列表
+type UserInviteeList @entity {
+  id: ID!
+  amount: BigInt!
+  account: Bytes! #address
+  inviter: Bytes! #address
+  createAt: BigInt!
+}
+
+# 28天周期排行榜
+type WeekTypeList @entity {
+  id: ID!
+  weekType: BigInt!
+  startAt: BigInt!
+  endAt: BigInt!
+  totalRankingRewards: BigDecimal!
+  totalFinancingRewards: BigDecimal!
+  totalInviteRewards: BigDecimal!
+  totalLiquidityRewards: BigDecimal!
+  totalStakingRewards: BigDecimal!
+  startBlock: BigInt!
+  endBlock: BigInt!
+}
+
+# 28天理财排行榜统计数据
+type UsersStateRanking @entity {
+  id: ID!
+  account: Bytes!
+  amount: BigInt!
+  inviter: Bytes!
+  weekType: BigInt!
+  createAt: BigInt!
+  rankingRewards: BigDecimal!
+  currentCommunity: BigInt! # 0 没有等级 1 普通 2 初级社区  3 中级社区 4 高级社区
+}

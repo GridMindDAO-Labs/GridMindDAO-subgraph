@@ -1,2 +1,0 @@
-# GridMindDAO-subgraph
-GridMindDAO-subgraph

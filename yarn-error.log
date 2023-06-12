@@ -1,0 +1,49 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.11/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/battleman/.local/share/solana/install/active_release/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/battleman/.cargo/bin
+
+Yarn version: 
+  1.22.11
+
+Node version: 
+  16.16.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@graphprotocol%2fgraph-cli: tunneling socket could not be established, cause=connect ECONNREFUSED 127.0.0.1:7890
+      at ClientRequest.onError (/usr/local/lib/node_modules/yarn/lib/cli.js:152249:17)
+      at Object.onceWrapper (node:events:642:26)
+      at ClientRequest.emit (node:events:527:28)
+      at Socket.socketErrorListener (node:_http_client:454:9)
+      at Socket.emit (node:events:527:28)
+      at emitErrorNT (node:internal/streams/destroy:157:8)
+      at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+    "name": "gmddao",
+    "license": "UNLICENSED",
+    "scripts": {
+      "codegen": "graph codegen",
+      "build": "graph build",
+      "deploy": "graph deploy --node https://api.thegraph.com/deploy/ gridmindlabs/gmddao",
+      "create-local": "graph create --node http://localhost:8020/ gridmindlabs/gmddao",
+      "remove-local": "graph remove --node http://localhost:8020/ gridmindlabs/gmddao",
+      "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 gridmindlabs/gmddao"
+    },
+    "dependencies": {
+      "@graphprotocol/graph-cli": "0.30.4",
+      "@graphprotocol/graph-ts": "0.27.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
